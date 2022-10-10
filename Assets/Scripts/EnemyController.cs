@@ -18,6 +18,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float aimTime;
     [SerializeField] private float attackStateThrustForce;
     [SerializeField] private float attackLungeImpulse = 35f;
+    [SerializeField] private float points = 10;
 
     private PlayerController _player;
     private Rigidbody _rigidbody;
@@ -125,5 +126,9 @@ public class EnemyController : MonoBehaviour
             -this._aimDirection * this.projectileSpeed, ForceMode.Impulse);
         
         yield return new WaitForSeconds(0.5f); // Small delay after fire.
+    }
+
+    private void OnDestroy() {
+        GameManager.Instance.AddScore(this.points);
     }
 }
